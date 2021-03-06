@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = azurerm_resource_group.main.name
 }
 
-resource "azurerm_subnet" "subnet" {
+resource "azurerm_subnet" "subnet1" {
   name                 = "VM-SUBNET"
   resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
@@ -30,8 +30,8 @@ resource "azurerm_network_interface" "main" {
   location            = azurerm_resource_group.main.location
   ip_configuration {
     name                          = "VM-IPNAME"
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_allocation = "Dynamic"
+    subnet_id                     = azurerm_subnet.subnet1.id
+    private_ip_address_allocation = "Static"
     public_ip_address_id          = azurerm_public_ip.main.id
   }
 }
@@ -39,7 +39,7 @@ resource "azurerm_network_security_group" "main" {
   name     = "VM-NSG"
   location = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
-  security_rule = {
+  security_rule  {
     access                     = "Allow"
     direction                  = "Inbound"
     name                       = "RDP"
