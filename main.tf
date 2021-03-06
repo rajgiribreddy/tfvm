@@ -24,7 +24,7 @@ resource "azurerm_public_ip" "main" {
     environment = "Prouction"
   }
 }
-resource "azuererm_network_interface" "main" {
+resource "azurerm_network_interface" "main" {
   name                = "VM-NIC"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
