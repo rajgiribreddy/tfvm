@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "main" {
-  name     = "VM-RG"
+  name     = "TVM-RG"
   location = "eastus"
 }
 resource "azurerm_virtual_network" "main" {
