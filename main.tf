@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "main" {
   location            = azurerm_resource_group.main.location
   ip_configuration {
     name                          = "VM-IPNAME"
-    subnet_id                     = azurerm_subnet.internal.id
+    subnet_id                     = azurerm_subnet.subnet.id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.main.id
   }
@@ -38,6 +38,7 @@ resource "azurerm_network_interface" "main" {
 resource "azurerm_network_security_group" "main" {
   name     = "VM-NSG"
   location = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
   security_rule = {
     access                     = "Allow"
     direction                  = "Inbound"
